@@ -10,7 +10,7 @@ public class Contacto {
     // Id del contacto
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     // Nombre del contacto
     @Column(name = "nombre", length = 80, nullable = false)
@@ -30,11 +30,11 @@ public class Contacto {
 
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,9 @@
 package com.example.tarea4.model;
 
 import jakarta.persistence.*;
+import com.example.tarea4.model.converters.EstadoDispositivoConverter;
+import com.example.tarea4.model.converters.TipoDispositivoConverter;
+
 
 @Entity
 @Table(name = "dispositivo")
@@ -9,10 +12,10 @@ public class Dispositivo {
     // Id del dispositivo
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     // Relación con la tabla de contacto
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "contacto_id", nullable = false)
     private Contacto contacto;
 
@@ -26,7 +29,7 @@ public class Dispositivo {
 
     // Tipo de dispositivo
     @Column(name = "tipo", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = TipoDispositivoConverter.class)
     private TipoDispositivo tipo;
 
     // Años de uso del dispositivo
@@ -35,7 +38,7 @@ public class Dispositivo {
 
     // Estado del dispositivo
     @Column(name = "estado", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = EstadoDispositivoConverter.class)
     private EstadoDispositivo estado;
 
     // Contador de me gusta del dispositivo
@@ -52,11 +55,11 @@ public class Dispositivo {
 
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

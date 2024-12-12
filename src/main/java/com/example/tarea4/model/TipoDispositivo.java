@@ -11,5 +11,5 @@ public enum TipoDispositivo {
     IMPRESORA,
     PARLANTE,
     AUDIFONOS,
-    OTRO
+    OTRO;
 }

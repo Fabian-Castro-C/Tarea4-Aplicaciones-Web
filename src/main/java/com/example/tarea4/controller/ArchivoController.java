@@ -31,6 +31,7 @@ public class ArchivoController {
                         .getFechaCreacion()
                         .compareTo(a1.getDispositivo().getContacto().getFechaCreacion()))
                 .map(archivo -> new ArchivoDTO(
+                        archivo.getId(),
                         archivo.getRutaArchivo(),
                         archivo.getDispositivo().getNombre(),
                         archivo.getDispositivo().getContacto().getEmail()

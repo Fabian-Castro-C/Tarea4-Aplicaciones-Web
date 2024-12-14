@@ -2,18 +2,28 @@ package com.example.tarea4.dto;
 
 public class ArchivoDTO {
 
+    private Long id; // ID del archivo
     private String rutaArchivo;
     private String nombreDispositivo;
     private String emailContacto;
 
     // Constructor
-    public ArchivoDTO(String rutaArchivo, String nombreDispositivo, String emailContacto) {
+    public ArchivoDTO(Long id, String rutaArchivo, String nombreDispositivo, String emailContacto) {
+        this.id = id;
         this.rutaArchivo = rutaArchivo;
         this.nombreDispositivo = nombreDispositivo;
         this.emailContacto = emailContacto;
     }
 
     // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getRutaArchivo() {
         return rutaArchivo;
     }

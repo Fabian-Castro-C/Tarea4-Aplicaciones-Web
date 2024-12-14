@@ -1,0 +1,253 @@
+/* Estilo general para la galería */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Contenedor principal de la galería */
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Tarjetas individuales */
+.galeria-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 400px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.galeria-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen dentro de la tarjeta */
+.galeria-item img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain; /* Asegura que la imagen no se deforme */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Contenedor del texto */
+.galeria-texto {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+.galeria-texto p {
+    margin: 5px 0;
+    word-wrap: break-word; /* Evitar desbordamiento de texto */
+}
+
+/* Botón de eliminación */
+button.btn-eliminar {
+    margin-top: auto;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button.btn-eliminar:hover {
+    background-color: #c9302c;
+    transform: translateY(-2px);
+}
+
+button.btn-eliminar:active {
+    background-color: #a11d1a;
+    transform: translateY(1px);
+}
+
+/* Ajustes de medios para dispositivos pequeños */
+@media (max-width: 768px) {
+    .galeria {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .galeria-item {
+        width: 90%;
+    }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal-content textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    line-height: 1.4;
+}
+
+.modal-content textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    padding: 12px 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 48%; /* Ajusta el tamaño de los botones */
+}
+
+.modal-buttons button#cancelar {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.modal-buttons button#cancelar:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.modal-buttons button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-buttons button[type="submit"]:hover {
+    background-color: #4cae4c;
+    transform: translateY(-2px);
+}
+
+/* Mejorar usabilidad en pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+    }
+
+    .modal-content textarea {
+        font-size: 14px;
+        height: 80px;
+    }
+
+    .modal-buttons button {
+        font-size: 13px;
+    }
+}
+.notificaciones {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notificacion {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+}
+
+.notificacion.error {
+    background-color: #f44336;
+}
+
+.notificacion .cerrar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 15px;
+}

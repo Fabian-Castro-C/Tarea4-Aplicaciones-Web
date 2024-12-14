@@ -11,13 +11,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/admin/**").authenticated() // Protege /admin
                         .anyRequest().permitAll() // El resto de las rutas son públicas
                 )
-                .formLogin() // Habilita el formulario de login
-                .and()
-                .httpBasic(); // Habilita autenticación básica
+                .formLogin(form -> form
+                        // No se especifica loginPage, se usa el formulario predeterminado
+                        .defaultSuccessUrl("/admin", true) // Redirige a /admin tras un login exitoso
+                        .permitAll() // Permite acceso al formulario de login sin autenticación
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // URL para cerrar sesión
+                        .logoutSuccessUrl("/") // Redirige al inicio tras cerrar sesión
+                        .permitAll()
+                );
 
         return http.build();
     }

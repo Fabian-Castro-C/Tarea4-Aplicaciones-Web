@@ -1,7 +1,7 @@
 package com.example.tarea4.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "contacto")
@@ -24,12 +24,21 @@ public class Contacto {
     @Column(name = "telefono", length = 15, nullable = false)
     private String telefono;
 
+    // Fecha de creación
+    @Column(name = "fecha_creacion", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime fechaCreacion;
+
     // Constructor por defecto
     public Contacto() {
     }
 
-    // Getters and Setters
+    // Constructor para inicializar fecha de creación
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
 
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -60,5 +69,13 @@ public class Contacto {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }

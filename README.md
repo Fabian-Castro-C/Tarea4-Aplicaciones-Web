@@ -131,20 +131,20 @@ com.example.tarea4
 
 ### Galería de Imágenes
 
-![Galería](path-to-screenshot1.png)
+![Galería](docs/images/galeria.png)
 
 ### Modal de Eliminación
 
-![Modal](path-to-screenshot2.png)
+![Modal](docs/images/modal.png)
 
 ---
 
 ## Instrucciones de Configuración
 
-1**Configurar la Base de Datos:**
+1. **Configurar la Base de Datos:**
     - Asegúrate de tener un directorio llamado `uploads` en la raíz del proyecto para almacenar las imágenes.
 
-2**Configurar el Archivo `application.properties`:**
+2. **Configurar el Archivo `application.properties`:**
    ```properties
     spring.application.name=Tarea4
     spring.datasource.url=jdbc:mysql://localhost:3306/tarea2
@@ -157,12 +157,18 @@ com.example.tarea4
     spring.security.user.password=tarea5cc5002
    ```
 
-3**Ejecutar el Proyecto:**
+3. **Ejecutar el Proyecto:**
    ```bash
    ./mvnw spring-boot:run
    ```
 
-4**Acceder a la Aplicación:**
+4. **Acceder a la Aplicación:**
     - Galería: [http://localhost:8080/admin](http://localhost:8080/admin)
     - Usuario: `admin`
     - Contraseña: `tarea5cc5002`
+
+
+## **Autores**
+- **Nombre del estudiante:** Fabián Castro Contreras
+- **Curso:** CC5002 - Desarrollo de Aplicaciones Web
+- **Profesor:** José Urzúa

@@ -1,118 +1,168 @@
-# Tarea 4 - Aplicación de Dispositivos
+# Tarea 5 - Administrador de Fotos para Dispositivos
 
-## **Descripción**
-Esta es una aplicación web desarrollada como parte de la tarea 4 del curso, que permite gestionar dispositivos a través de un listado dinámico. La aplicación incluye la funcionalidad para interactuar con los dispositivos mediante botones de "Me gusta" y "No me gusta", actualizando los contadores asociados en tiempo real usando AJAX.
+## Descripción del Proyecto
 
-## **Tecnologías Utilizadas**
-- **Backend:**
-    - Framework: Spring Boot.
-    - Lenguaje: Java 17.
-    - Base de datos: MySQL.
-    - ORM: Spring Data JPA.
+Este proyecto consiste en un administrador de fotos asociadas a dispositivos electrónicos, desarrollado con **SpringBoot** y **Spring Security** como parte de la Tarea 5 del curso **CC5002**. La aplicación permite a un usuario administrador gestionar una galería de fotos ingresadas, implementando las siguientes funcionalidades:
+
+1. **Visualización de Galería:** Muestra una lista de fotos asociadas a dispositivos ordenadas desde la más reciente hasta la más antigua.
+2. **Información Adjunta:** Cada foto muestra:
+    - Nombre del dispositivo.
+    - Correo electrónico del contacto correspondiente.
+3. **Eliminación de Fotos:** Los usuarios pueden eliminar fotos proporcionando un motivo. Este motivo, junto con un registro de la acción, se almacena en la base de datos.
+4. **Autenticación:** El acceso a la galería está protegido por autenticación mediante Spring Security. Solo el usuario administrador puede acceder a las funcionalidades.
+
+---
+
+## Requisitos del Sistema
+
+- **Java:** Versión 17.
+- **Frameworks:**
+    - SpringBoot 3.3 o 3.4.
+    - Spring Security.
+- **Base de Datos:** MySQL.
+- **Entorno de Desarrollo:** Maven.
 - **Frontend:**
-    - Lenguajes: HTML5, CSS3, JavaScript.
-    - Biblioteca: jQuery para manejo de AJAX.
-- **Herramientas:**
-    - Maven para gestión de dependencias.
-    - Validadores W3C para HTML y CSS.
+    - HTML5, CSS3, y JavaScript (con uso de AJAX).
+    - Compatible con navegadores modernos y resolución mínima de 1024x768.
+- **Configuración de Usuario:**
+    - Usuario: `admin`
+    - Contraseña: `tarea5cc5002`
 
 ---
 
-## **Estructura del Proyecto**
-La estructura del proyecto está organizada de la siguiente manera:
+## Estructura del Proyecto
 
+### Backend
+
+- **Configuración:**
+    - `SecurityConfig.java`: Configuración de seguridad con autenticación basada en sesiones.
+    - `WebConfig.java`: Gestión de recursos estáticos.
+
+- **Controladores:**
+    - `AdminController`: Proporciona endpoints para obtener las imágenes y eliminarlas.
+    - `AdminPageController`: Renderiza la página de administración protegida.
+    - `ArchivoController`: Maneja las APIs públicas relacionadas con los archivos.
+    - `DispositivoController`: Proporciona acceso a la información de dispositivos.
+
+- **Modelos:**
+    - `Archivo`: Modelo que representa los archivos (fotos).
+    - `Contacto`: Representa los contactos asociados a dispositivos.
+    - `Dispositivo`: Representa la información de cada dispositivo (nombre, estado, etc.).
+    - `Log`: Modelo para registrar las acciones administrativas.
+    - **DTO:**
+        - `ArchivoDTO`: Objeto de transferencia para cargar datos al frontend.
+
+- **Repositorios:**
+    - `ArchivoRepository`: Operaciones de base de datos relacionadas con los archivos.
+    - `ContactoRepository`: Operaciones relacionadas con los contactos.
+    - `DispositivoRepository`: Gestión de dispositivos.
+    - `LogRepository`: Registra las acciones de eliminación.
+
+---
+
+### Frontend
+
+- **HTML:**
+    - `admin.html`: Página protegida que muestra la galería.
+    - `index.html`: Página de inicio (pública).
+
+- **CSS:**
+    - `styles.css`: Estilo principal para la aplicación.
+    - `admin.css`: Estilo específico para la galería.
+
+- **JavaScript:**
+    - `admin.js`: Manejo dinámico de la galería y eliminación de imágenes con AJAX.
+    - `script.js`: Scripts auxiliares.
+    - `jquery-3.6.0.min.js`: Biblioteca auxiliar.
+
+---
+
+## Esquema del Proyecto
+
+```plaintext
+com.example.tarea4
+│
+├── config
+│   ├── SecurityConfig.java
+│   ├── WebConfig.java
+│
+├── controller
+│   ├── AdminController.java
+│   ├── AdminPageController.java
+│   ├── ArchivoController.java
+│   ├── DispositivoController.java
+│
+├── dto
+│   ├── ArchivoDTO.java
+│
+├── model
+│   ├── Archivo.java
+│   ├── Contacto.java
+│   ├── Dispositivo.java
+│   ├── Log.java
+│   └── converters
+│       ├── EstadoDispositivoConverter.java
+│       ├── TipoDispositivoConverter.java
+│
+├── repository
+│   ├── ArchivoRepository.java
+│   ├── ContactoRepository.java
+│   ├── DispositivoRepository.java
+│   ├── LogRepository.java
+│
+└── Tarea4Application.java
 ```
-src/
-├── main/
-│   ├── java/
-│   │   └── com.example.tarea4/
-│   │       ├── controller/
-│   │       │   └── DispositivoController.java    # Controlador principal
-│   │       ├── model/
-│   │       │   ├── converters/
-│   │       │   │   ├── EstadoDispositivoConverter.java
-│   │       │   │   └── TipoDispositivoConverter.java
-│   │       │   ├── Contacto.java                 # Modelo Contacto
-│   │       │   ├── Dispositivo.java              # Modelo Dispositivo
-│   │       │   ├── EstadoDispositivo.java
-│   │       │   └── TipoDispositivo.java
-│   │       ├── repository/
-│   │       │   └── DispositivoRepository.java    # Repositorio para acceso a BD
-│   │       └── Tarea4Application.java            # Clase principal
-│   ├── resources/
-│   │   ├── static/
-│   │   │   ├── script.js                         # Lógica del frontend
-│   │   │   └── styles.css                        # Estilo del frontend
-│   │   ├── templates/
-│   │   │   └── index.html                        # Interfaz principal
-│   │   └── application.properties                # Configuración del proyecto
-└── test/
-```
 
 ---
 
-## **Funcionalidades**
-1. **Listado de Dispositivos:**
-    - La interfaz muestra una tabla con los siguientes campos:
-        - ID, Nombre, Tipo, Años de uso, Estado.
-        - Botones para "Me gusta" y "No me gusta" con sus contadores.
+## Rutas del Proyecto
 
-2. **Interacción con los botones:**
-    - Los usuarios pueden dar "Me gusta" o "No me gusta" a un dispositivo.
-    - Los contadores se actualizan en tiempo real mediante AJAX.
-    - Si el usuario activa un botón, el otro se desactiva automáticamente.
+### Backend
 
-3. **Persistencia en la Base de Datos:**
-    - Los contadores de likes y dislikes se almacenan en la base de datos para persistencia.
-
-4. **Validación y Estilo:**
-    - Código HTML y CSS validado por W3C.
+| Ruta               | Método HTTP | Descripción                                  |
+|--------------------|-------------|----------------------------------------------|
+| `/admin/imagenes`  | GET         | Obtiene la lista de imágenes protegidas.     |
+| `/admin/imagenes/{id}` | DELETE  | Elimina una imagen y registra el motivo.     |
+| `/api/archivos`    | GET         | Obtiene los datos de imágenes para el frontend. |
 
 ---
 
-## **Instalación y Configuración**
+## Capturas
 
-1**Configurar `application.properties`:**
-    - El archivo ya está configurado con los valores necesarios para conectarse a la base de datos. Las credenciales son las siguientes:
-      ```
-      spring.datasource.url=jdbc:mysql://localhost:3306/tarea2
-      spring.datasource.username=cc5002
-      spring.datasource.password=programacionweb
-      spring.jpa.hibernate.ddl-auto=update
-      spring.jpa.show-sql=true
-      spring.jpa.open-in-view=false
-      ```
+### Galería de Imágenes
 
-2**Ejecutar la Aplicación:**
-    - Usa Maven para compilar y ejecutar el proyecto:
-      ```bash
-      mvn spring-boot:run
-      ```
+![Galería](path-to-screenshot1.png)
 
-3**Acceso a la Interfaz:**
-    - Abre tu navegador y accede a `http://localhost:8080`.
+### Modal de Eliminación
+
+![Modal](path-to-screenshot2.png)
 
 ---
 
-## **Endpoints**
-Los siguientes endpoints están implementados en el controlador `DispositivoController`:
+## Instrucciones de Configuración
 
-| Método | Endpoint                  | Descripción                                   |
-|--------|---------------------------|-----------------------------------------------|
-| GET    | `/api/dispositivos`       | Obtiene todos los dispositivos.              |
-| POST   | `/api/dispositivos/{id}/like`  | Incrementa el contador de "Me gusta".         |
-| POST   | `/api/dispositivos/{id}/dislike`| Incrementa el contador de "No me gusta".      |
-| POST   | `/api/dispositivos/{id}/unlike` | Decrementa el contador de "Me gusta".         |
-| POST   | `/api/dispositivos/{id}/undislike`| Decrementa el contador de "No me gusta".      |
+1**Configurar la Base de Datos:**
+    - Asegúrate de tener un directorio llamado `uploads` en la raíz del proyecto para almacenar las imágenes.
 
----
+2**Configurar el Archivo `application.properties`:**
+   ```properties
+    spring.application.name=Tarea4
+    spring.datasource.url=jdbc:mysql://localhost:3306/tarea2
+    spring.datasource.username=cc5002
+    spring.datasource.password=programacionweb
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.show-sql=true
+    spring.jpa.open-in-view=false
+    spring.security.user.name=admin
+    spring.security.user.password=tarea5cc5002
+   ```
 
-## **Captura de Pantalla**
-![Captura de Pantalla](docs/images/captura-tabla.png)
+3**Ejecutar el Proyecto:**
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
----
-
-## **Autores**
-- **Nombre del estudiante:** Fabián Castro Contreras
-- **Curso:** CC5002 - Desarrollo de Aplicaciones Web
-- **Profesor:** José Urzúa
+4**Acceder a la Aplicación:**
+    - Galería: [http://localhost:8080/admin](http://localhost:8080/admin)
+    - Usuario: `admin`
+    - Contraseña: `tarea5cc5002`

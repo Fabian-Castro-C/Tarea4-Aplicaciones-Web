@@ -1,0 +1,92 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Encabezado */
+h1 {
+    text-align: center;
+    color: #2574a9;
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #2574a9;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #eaf6ff;
+}
+
+/* Botones */
+button {
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button#like-button {
+    background-color: #5cb85c;
+    color: white;
+}
+
+button#like-button:hover:not(:disabled) {
+    background-color: #4cae4c;
+}
+
+button#dislike-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+button#dislike-button:hover:not(:disabled) {
+    background-color: #c9302c;
+}
+
+/* Iconos dentro de los botones */
+button svg {
+    margin-right: 5px;
+}
+
+/* Alinear el contenido */
+td:last-child {
+    text-align: center;
+}

@@ -1,7 +1,3 @@
-Gracias por compartir el contenido de `application.properties` y por mencionar que el proyecto no está en GitHub. Actualicemos el README en consecuencia, eliminando la referencia a GitHub y ajustando la información relevante.
-
----
-
 # Tarea 4 - Aplicación de Dispositivos
 
 ## **Descripción**
